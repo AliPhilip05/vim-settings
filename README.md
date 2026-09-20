@@ -2,5 +2,5 @@
 
 # output
 
-![Output1](Output%20/Main.png)
-![Output2](Output%20/Example.png)
+![Output1](Outputs%20/Main.png)
+![Output2](Outputs%20/Example.png)
