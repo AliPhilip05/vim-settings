@@ -3,4 +3,4 @@
 # output
 
 ![Output1](Outputs/Main.png)
-![Output2](Outputs%20/Example.png)
+![Output2](Outputs/Example.png)
