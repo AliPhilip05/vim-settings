@@ -25,7 +25,8 @@ lua/josean/plugins/	Plugin configurations
 lua/josean/plugins/lsp/	LSP-related configuration
 lua/josean/lazy.lua	Lazy.nvim bootstrap and plugin loading
 lazy-lock.json	Locked plugin versions
-✨ Features
+
+### Features
 
 
 The current lockfile includes plugins such as telescope.nvim, nvim-treesitter, nvim-lspconfig, nvim-cmp, mason.nvim, conform.nvim, nvim-lint, gitsigns.nvim, nvim-tree.lua, tokyonight.nvim, trouble.nvim, and others. {"fallbackMarkdown":"(GitHub)","reference":{"matched_text":"","prefix":null,"start_idx":2151,"end_idx":2168,"safe_urls":["https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lazy-lock.json"],"refs":[],"alt":"(GitHub)","prompt_text":null,"type":"grouped_webpages","fallback_items":null,"status":"done","style":null,"error":null,"items":[{"title":"","url":"https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lazy-lock.json","attribution":"GitHub","pub_date":null,"snippet":null,"attribution_segments":null,"supporting_websites":[],"refs":[{"turn_index":2,"ref_type":"view","ref_index":2}],"hue":null,"attributions":null}]},"showLoginRequiredCard":false}
