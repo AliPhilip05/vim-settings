@@ -8,7 +8,8 @@ This configuration is focused on providing a modern development environment with
 ![Output1](Outputs/Main.png)
 
 ###  Structure
-.
+
+```
 ├── init.lua
 ├── lazy-lock.json
 ├── lua/
@@ -17,6 +18,8 @@ This configuration is focused on providing a modern development environment with
 │       ├── plugins/
 │       └── lazy.lua
 └── Outputs/
+```
+
 Main files
 File	Purpose
 init.lua	Entry point for the Neovim configuration
