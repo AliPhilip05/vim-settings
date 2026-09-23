@@ -7,7 +7,7 @@ This configuration is focused on providing a modern development environment with
 
 ![Output1](Outputs/Main.png)
 
-📁 Structure
+###  Structure
 .
 ├── init.lua
 ├── lazy-lock.json
@@ -62,7 +62,7 @@ nvim
 
 Lazy.nvim will bootstrap itself and install the configured plugins. The configuration explicitly bootstraps Lazy.nvim if it is not already installed. {"fallbackMarkdown":"(GitHub)","reference":{"matched_text":"","prefix":null,"start_idx":2967,"end_idx":2984,"safe_urls":["https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lua/josean/lazy.lua"],"refs":[],"alt":"(GitHub)","prompt_text":null,"type":"grouped_webpages","fallback_items":null,"status":"done","style":null,"error":null,"items":[{"title":"","url":"https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lua/josean/lazy.lua","attribution":"GitHub","pub_date":null,"snippet":null,"attribution_segments":null,"supporting_websites":[],"refs":[{"turn_index":2,"ref_type":"view","ref_index":1}],"hue":null,"attributions":null}]},"showLoginRequiredCard":false}
 
-⚙️ How It Works
+### How It Works
 
 The main init.lua is intentionally small:
 
@@ -124,8 +124,7 @@ lazygit.nvim — Lazygit integration
 
 vim-tmux-navigator — Tmux/Neovim navigation
 
-The exact plugin revisions are pinned in lazy-lock.json for reproducible setups. {"fallbackMarkdown":"(GitHub)","reference":{"matched_text":"","prefix":null,"start_idx":4346,"end_idx":4363,"safe_urls":["https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lazy-lock.json"],"refs":[],"alt":"(GitHub)","prompt_text":null,"type":"grouped_webpages","fallback_items":null,"status":"done","style":null,"error":null,"items":[{"title":"","url":"https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lazy-lock.json","attribution":"GitHub","pub_date":null,"snippet":null,"attribution_segments":null,"supporting_websites":[],"refs":[{"turn_index":2,"ref_type":"view","ref_index":2}],"hue":null,"attributions":null}]},"showLoginRequiredCard":false}
-
+The exact plugin revisions are pinned in lazy-lock.json for reproducible setups. 
 
 
 Inside Neovim, Lazy.nvim can be opened with:
