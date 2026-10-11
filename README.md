@@ -1,154 +1,107 @@
 # vim-settings
-Neovim Configuration
 
-My personal Neovim configuration, written in Lua and managed with Lazy.nvim.
+My personal Neovim configuration, written in Lua and managed with lazy.nvim.
+It provides LSP support, completion, syntax parsing, Git tools, file navigation,
+fuzzy finding, formatting, linting, and a black Tokyo Night editing theme.
 
-This configuration is focused on providing a modern development environment with LSP support, autocompletion, Treesitter, Git integration, file navigation, fuzzy finding, formatting, linting, and a comfortable editing workflow.
+## Project layout
 
-![Output1](Outputs/Main.png)
+~~~text
+init.lua
+lazy-lock.json
+lua/
+└── josean/
+    ├── core/       # Options and keymaps
+    ├── plugins/    # Plugin specifications and setup
+    │   └── lsp/    # Language server and Mason setup
+    └── lazy.lua    # lazy.nvim bootstrap and plugin loading
+~~~
 
-###  Structure
+## Startup flow
 
-```
-├── init.lua
-├── lazy-lock.json
-├── lua/
-│   └── josean/
-│       ├── core/
-│       ├── plugins/
-│       └── lazy.lua
-└── Outputs/
-```
+The entry point sets the leader key and disables netrw before loading core
+settings or plugins. Core options and keymaps load before lazy.nvim imports the
+plugin specifications.
 
-Main files
-File	Purpose
-init.lua	Entry point for the Neovim configuration
-lua/josean/core/	Core Neovim settings and options
-lua/josean/plugins/	Plugin configurations
-lua/josean/plugins/lsp/	LSP-related configuration
-lua/josean/lazy.lua	Lazy.nvim bootstrap and plugin loading
-lazy-lock.json	Locked plugin versions
+~~~lua
+-- init.lua
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
-### Features
+-- Let nvim-tree own directory buffers from startup.
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
+require("josean.core") -- options and keymaps
+require("josean.lazy") -- bootstrap lazy.nvim and load plugins
+~~~
 
-The current lockfile includes plugins such as telescope.nvim, nvim-treesitter, nvim-lspconfig, nvim-cmp, mason.nvim, conform.nvim, nvim-lint, gitsigns.nvim, nvim-tree.lua, tokyonight.nvim, trouble.nvim, and others. {"fallbackMarkdown":"(GitHub)","reference":{"matched_text":"","prefix":null,"start_idx":2151,"end_idx":2168,"safe_urls":["https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lazy-lock.json"],"refs":[],"alt":"(GitHub)","prompt_text":null,"type":"grouped_webpages","fallback_items":null,"status":"done","style":null,"error":null,"items":[{"title":"","url":"https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lazy-lock.json","attribution":"GitHub","pub_date":null,"snippet":null,"attribution_segments":null,"supporting_websites":[],"refs":[{"turn_index":2,"ref_type":"view","ref_index":2}],"hue":null,"attributions":null}]},"showLoginRequiredCard":false}
+This order makes Space-prefixed mappings consistent and prevents netrw from
+competing with nvim-tree.
 
-### Installation
-Requirements
+## Example: file explorer command
 
-Make sure the following are installed:
+A mapping specifies the mode, key sequence, and action. In normal mode, pressing
+Space, then e, then e runs the NvimTreeToggle command:
 
-Neovim
+~~~lua
+-- lua/josean/plugins/nvim-tree.lua
+vim.keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", {
+  desc = "Toggle file explorer",
+})
+~~~
 
-Git
+The explorer follows the focused file and current working directory.
 
-A working C compiler/toolchain for native plugins
+| Keys | Action |
+| --- | --- |
+| Space e e | Toggle the file explorer |
+| Space e f | Find the current file in the explorer |
+| Space e c | Collapse the explorer tree |
+| Space e r | Refresh the explorer |
 
-ripgrep for Telescope search
+The explorer also has built-in file actions. Press g? while it is open to see
+its mappings.
 
-Node.js if required by the language servers you use
+## Plugins
 
-tmux if using the tmux navigation integration
+The lockfile pins the installed plugin revisions. Main plugins include:
 
-Clone the configuration
+| Plugin | Purpose |
+| --- | --- |
+| lazy.nvim | Plugin manager |
+| telescope.nvim | Fuzzy finder |
+| nvim-tree.lua | File explorer |
+| nvim-treesitter | Syntax parsing |
+| nvim-lspconfig, mason.nvim | Language servers and installer |
+| nvim-cmp, LuaSnip | Completion and snippets |
+| conform.nvim, nvim-lint | Formatting and linting |
+| gitsigns.nvim, lazygit.nvim | Git integration |
+| trouble.nvim | Diagnostics and references |
+| tokyonight.nvim | Colorscheme, customized with a black background |
+| lualine.nvim, bufferline.nvim | Statusline and buffer tabs |
+| which-key.nvim | Keybinding helper |
+| vim-tmux-navigator | Tmux and Neovim navigation |
 
-Back up your existing Neovim configuration first, then clone this repository:
+LSP configuration lives in lua/josean/plugins/lsp. Open the plugin manager in
+Neovim with :Lazy.
 
+## Installation
+
+Requirements: Neovim, Git, a C compiler/toolchain, ripgrep for Telescope, and
+Node.js for language servers that need it. tmux is needed for the tmux
+navigation integration.
+
+Back up an existing Neovim configuration, then clone this repository:
+
+~~~sh
 git clone https://github.com/AliPhilip05/vim-settings.git ~/.config/nvim
-
-
-### Start Neovim:
-
 nvim
+~~~
 
+lazy.nvim bootstraps itself on the first launch and installs the configured
+plugins.
 
-Lazy.nvim will bootstrap itself and install the configured plugins. The configuration explicitly bootstraps Lazy.nvim if it is not already installed. {"fallbackMarkdown":"(GitHub)","reference":{"matched_text":"","prefix":null,"start_idx":2967,"end_idx":2984,"safe_urls":["https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lua/josean/lazy.lua"],"refs":[],"alt":"(GitHub)","prompt_text":null,"type":"grouped_webpages","fallback_items":null,"status":"done","style":null,"error":null,"items":[{"title":"","url":"https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lua/josean/lazy.lua","attribution":"GitHub","pub_date":null,"snippet":null,"attribution_segments":null,"supporting_websites":[],"refs":[{"turn_index":2,"ref_type":"view","ref_index":1}],"hue":null,"attributions":null}]},"showLoginRequiredCard":false}
-
-### How It Works
-
-The main init.lua is intentionally small:
-
-require("josean.core")
-require("josean.lazy")
-
-
-The core configuration is loaded first, followed by the plugin manager. {"fallbackMarkdown":"(GitHub)","reference":{"matched_text":"","prefix":null,"start_idx":3181,"end_idx":3198,"safe_urls":["https://github.com/AliPhilip05/vim-settings/blob/main/init.lua"],"refs":[],"alt":"(GitHub)","prompt_text":null,"type":"grouped_webpages","fallback_items":null,"status":"done","style":null,"error":null,"items":[{"title":"vim-settings/init.lua at main · AliPhilip05/vim-settings · GitHub","url":"https://github.com/AliPhilip05/vim-settings/blob/main/init.lua","attribution":"GitHub","pub_date":null,"snippet":null,"thumbnail_url":"https://images.openai.com/static-rsc-1/w5XoNuqZgCf5aEvSt9sdNssv6u6LuboJ21n9roexAnUBoJXKGwWiLB04G9FE3_F1mCdr910FnbTI2jmzEH7PxZkbplkPIZnaD0cGxNQcO_YE8WonHnrIaObyP33w3WShfPmb42jCyQFT13tZy3X82wA4CQJA3nmOa9HWSnJEovuX-c9WYiNpIsbgXpefqns0","attribution_segments":null,"supporting_websites":[],"refs":[{"turn_index":1,"ref_type":"view","ref_index":0}],"hue":null,"attributions":null}]},"showLoginRequiredCard":false}
-
-Lazy.nvim then imports plugins from:
-
-josean.plugins
-josean.plugins.lsp
-
-
-Plugin update checking is enabled while notifications and change-detection notifications are disabled. {"fallbackMarkdown":"(GitHub)","reference":{"matched_text":"","prefix":null,"start_idx":3387,"end_idx":3404,"safe_urls":["https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lua/josean/lazy.lua"],"refs":[],"alt":"(GitHub)","prompt_text":null,"type":"grouped_webpages","fallback_items":null,"status":"done","style":null,"error":null,"items":[{"title":"","url":"https://raw.githubusercontent.com/AliPhilip05/vim-settings/main/lua/josean/lazy.lua","attribution":"GitHub","pub_date":null,"snippet":null,"attribution_segments":null,"supporting_websites":[],"refs":[{"turn_index":2,"ref_type":"view","ref_index":1}],"hue":null,"attributions":null}]},"showLoginRequiredCard":false}
-
-### Plugins
-
-Some of the main plugins currently included are:
-
-lazy.nvim — Plugin manager
-
-telescope.nvim — Fuzzy finder
-
-nvim-tree.lua — File explorer
-
-nvim-treesitter — Syntax parsing
-
-nvim-lspconfig — LSP configuration
-
-mason.nvim — LSP/tool installer
-
-nvim-cmp — Completion engine
-
-LuaSnip — Snippet engine
-
-gitsigns.nvim — Git decorations and actions
-
-conform.nvim — Code formatting
-
-nvim-lint — Asynchronous linting
-
-trouble.nvim — Diagnostics and references
-
-which-key.nvim — Keybinding helper
-
-tokyonight.nvim — Colorscheme
-
-lualine.nvim — Statusline
-
-bufferline.nvim — Buffer tabs
-
-nvim-autopairs — Automatic brackets/quotes
-
-nvim-surround — Surround text objects
-
-lazygit.nvim — Lazygit integration
-
-vim-tmux-navigator — Tmux/Neovim navigation
-
-The exact plugin revisions are pinned in lazy-lock.json for reproducible setups. 
-
-
-Inside Neovim, Lazy.nvim can be opened with:
-
-:Lazy
-
-
-### LSP configuration lives under:
-
-lua/josean/plugins/lsp/
-
-
-This keeps language-server configuration separate from the rest of the plugin configuration and makes it easier to add or modify language support.
-
-This is a personal Neovim configuration, so some settings and keybindings are tailored to my own workflow. Feel free to use it as a starting point for your own configuration and modify anything you need.
-
-### License
+## License
 
 Use, modify, and adapt this configuration as you see fit.
-
-
-# output
-
-![Output2](Outputs/Example.png)
