@@ -39,6 +39,20 @@ require("josean.lazy") -- bootstrap lazy.nvim and load plugins
 This order makes Space-prefixed mappings consistent and prevents netrw from
 competing with nvim-tree.
 
+## Screenshots and preview
+
+This illustrated black-theme preview shows the configured file tree, Lua editor,
+completion menu, and statusline together:
+
+![Neovim black theme preview](Outputs/Neovim-in-action.png)
+
+The following screenshots are earlier captures from this configuration, before
+switching the palette to black:
+
+![Neovim start screen](Outputs/Main.png)
+
+![File explorer and code buffer](Outputs/Example.png)
+
 ## Example: file explorer command
 
 A mapping specifies the mode, key sequence, and action. In normal mode, pressing
@@ -60,8 +74,7 @@ The explorer follows the focused file and current working directory.
 | Space e c | Collapse the explorer tree |
 | Space e r | Refresh the explorer |
 
-The explorer also has built-in file actions. Press g? while it is open to see
-its mappings.
+Press g? while the explorer is open to see its built-in file actions.
 
 ## Plugins
 
@@ -101,6 +114,13 @@ nvim
 
 lazy.nvim bootstraps itself on the first launch and installs the configured
 plugins.
+
+To pull the latest version into an existing clone:
+
+~~~sh
+cd ~/.config/nvim
+git pull --ff-only origin main
+~~~
 
 ## License
 
