@@ -3,6 +3,12 @@ local keymap = vim.keymap -- for conciseness
 ---------------------
 -- General Keymaps -------------------
 
+-- Move up with j/J and down with k/K
+keymap.set({ "n", "x", "o" }, "j", "k", { desc = "Move up" })
+keymap.set({ "n", "x", "o" }, "k", "j", { desc = "Move down" })
+keymap.set({ "n", "x", "o" }, "J", "k", { desc = "Move up" })
+keymap.set({ "n", "x", "o" }, "K", "j", { desc = "Move down" })
+
 -- use jk to exit insert mode
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 

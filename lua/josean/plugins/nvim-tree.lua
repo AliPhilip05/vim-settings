@@ -35,11 +35,15 @@ return {
           },
         },
       },
+      -- Avoid recursive watchers on very large roots; refresh remains available via <leader>er.
+      filesystem_watchers = {
+        enable = false,
+      },
       filters = {
         custom = { ".DS_Store" },
       },
       git = {
-        ignore = false,
+        ignore = true,
       },
     })
 
